@@ -1,3 +1,4 @@
+import contextlib
 import time
 import unittest
 import os
@@ -226,8 +227,8 @@ class TestKeyPact(unittest.TestCase):
 
         self.assertEqual(database_list, {})
 
-
-        shutil.rmtree(os.path.join(self.kp.location, the_time))
+        with contextlib.suppress(PermissionError):
+            shutil.rmtree(os.path.join(self.kp.location, the_time))
 
 
         os.chdir(backup_chdir)
